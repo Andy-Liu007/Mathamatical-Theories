@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数极限唯一性定理 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>函数极限唯一性定理 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div class="example">
+            <h2>例题1：函数极限唯一性的验证</h2>
+            <div class="example-question">
+                <p>验证函数f(x) = (x² - 4)/(x - 2)在x→2时的极限是否唯一。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先化简函数：当x ≠ 2时，(x² - 4)/(x - 2) = (x - 2)(x + 2)/(x - 2) = x + 2<br>
+                    <br>
+                    计算x→2时的极限：limₓ→2 f(x) = limₓ→2 (x + 2) = 4<br>
+                    <br>
+                    假设存在另一个极限B ≠ 4，则根据函数极限的唯一性定理，这是不可能的<br>
+                    <br>
+                    因此，函数f(x)在x→2时的极限唯一，为4
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题2：唯一性定理的应用</h2>
+            <div class="example-question">
+                <p>已知limₓ→0 f(x) = L，且f(x) = (sinx)/x + cx²，求常数L和c的值。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先，我们知道limₓ→0 (sinx)/x = 1（重要极限）<br>
+                    <br>
+                    根据函数极限的四则运算法则：<br>
+                    limₓ→0 f(x) = limₓ→0 [(sinx)/x + cx²] = limₓ→0 (sinx)/x + c·limₓ→0 x² = 1 + c·0 = 1<br>
+                    <br>
+                    由函数极限的唯一性定理，limₓ→0 f(x) = L = 1，因此L = 1<br>
+                    <br>
+                    由于极限值与c无关，c可以是任意实数<br>
+                    <br>
+                    结论：L = 1，c为任意实数
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>

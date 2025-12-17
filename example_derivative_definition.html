@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导数与微分的定义 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>导数与微分的定义 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div class="example">
+            <h2>例题1：用导数定义求函数的导数</h2>
+            <div class="example-question">
+                <p>用导数的定义求函数f(x) = x²在x = 1处的导数。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    根据导数的定义：f'(x₀) = limₕ→₀ [f(x₀+h) - f(x₀)] / h<br>
+                    <br>
+                    代入x₀ = 1，f(x) = x²：<br>
+                    f'(1) = limₕ→₀ [(1+h)² - 1²] / h<br>
+                    = limₕ→₀ [1 + 2h + h² - 1] / h<br>
+                    = limₕ→₀ [2h + h²] / h<br>
+                    = limₕ→₀ [2 + h]<br>
+                    = 2<br>
+                    <br>
+                    因此，f'(1) = 2
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题2：求函数的微分</h2>
+            <div class="example-question">
+                <p>求函数y = x³ + 2x² - 5x + 1的微分。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先求函数的导数：y' = 3x² + 4x - 5<br>
+                    <br>
+                    根据微分的定义：dy = y' dx<br>
+                    <br>
+                    代入导数结果：dy = (3x² + 4x - 5) dx<br>
+                    <br>
+                    因此，函数的微分为dy = (3x² + 4x - 5) dx
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题3：用微分进行近似计算</h2>
+            <div class="example-question">
+                <p>利用微分近似计算√4.01的值。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    设f(x) = √x，取x₀ = 4，Δx = 0.01<br>
+                    <br>
+                    首先求f(x)的导数：f'(x) = 1/(2√x)<br>
+                    <br>
+                    计算f(x₀)和f'(x₀)：<br>
+                    f(4) = √4 = 2<br>
+                    f'(4) = 1/(2√4) = 1/4<br>
+                    <br>
+                    根据微分近似公式：f(x₀+Δx) ≈ f(x₀) + f'(x₀)Δx<br>
+                    <br>
+                    代入数值：√4.01 = f(4+0.01) ≈ f(4) + f'(4)×0.01 = 2 + (1/4)×0.01 = 2 + 0.0025 = 2.0025<br>
+                    <br>
+                    因此，√4.01 ≈ 2.0025（精确值约为2.002498439）
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>

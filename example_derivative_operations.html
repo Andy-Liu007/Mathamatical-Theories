@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导数的运算 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>导数的运算 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div class="example">
+            <h2>例题1：基本导数公式的应用</h2>
+            <div class="example-question">
+                <p>求下列函数的导数：</p>
+                <ol>
+                    <li>f(x) = x⁵</li>
+                    <li>g(x) = sinx</li>
+                    <li>h(x) = eˣ</li>
+                    <li>k(x) = ln|x|</li>
+                </ol>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    1. 对于f(x) = x⁵，使用幂函数导数公式：(xⁿ)' = nxⁿ⁻¹<br>
+                       f'(x) = 5x⁴<br>
+                    <br>
+                    2. 对于g(x) = sinx，使用三角函数导数公式：(sinx)' = cosx<br>
+                       g'(x) = cosx<br>
+                    <br>
+                    3. 对于h(x) = eˣ，使用指数函数导数公式：(eˣ)' = eˣ<br>
+                       h'(x) = eˣ<br>
+                    <br>
+                    4. 对于k(x) = ln|x|，使用对数函数导数公式：(ln|x|)' = 1/x<br>
+                       k'(x) = 1/x
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题2：导数的四则运算</h2>
+            <div class="example-question">
+                <p>求函数f(x) = x²sinx + 3eˣ的导数。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先，我们可以将函数拆分为两部分：f(x) = u(x) + v(x)，其中u(x) = x²sinx，v(x) = 3eˣ<br>
+                    <br>
+                    对于u(x) = x²sinx，使用乘积法则：(uv)' = u'v + uv'<br>
+                    u'(x) = (x²)'sinx + x²(sinx)' = 2x sinx + x² cosx<br>
+                    <br>
+                    对于v(x) = 3eˣ，使用常数乘法法则和指数函数导数公式：<br>
+                    v'(x) = 3(eˣ)' = 3eˣ<br>
+                    <br>
+                    因此，f'(x) = u'(x) + v'(x) = 2x sinx + x² cosx + 3eˣ
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题3：复合函数求导</h2>
+            <div class="example-question">
+                <p>求函数y = sin(x² + 1)的导数。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    设u = x² + 1，则y = sinu<br>
+                    <br>
+                    使用链式法则：dy/dx = dy/du · du/dx<br>
+                    <br>
+                    计算dy/du：dy/du = (sinu)' = cosu<br>
+                    <br>
+                    计算du/dx：du/dx = (x² + 1)' = 2x<br>
+                    <br>
+                    因此，dy/dx = cosu · 2x = 2x cos(x² + 1)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题4：反函数求导法则（反正弦函数）</h2>
+            <div class="example-question">
+                <p>已知y = arcsinx，求dy/dx。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    因为y = arcsinx，所以x = siny，其中y ∈ [-π/2, π/2]<br>
+                    <br>
+                    对x = siny两边关于x求导：1 = cosy · dy/dx<br>
+                    <br>
+                    因此，dy/dx = 1/cosy<br>
+                    <br>
+                    由于y ∈ [-π/2, π/2]，所以cosy ≥ 0，因此cosy = √(1 - sin²y) = √(1 - x²)<br>
+                    <br>
+                    所以，dy/dx = 1/√(1 - x²)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题5：反函数求导法则（反正切函数）</h2>
+            <div class="example-question">
+                <p>已知y = arctanx，求dy/dx。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    因为y = arctanx，所以x = tany，其中y ∈ (-π/2, π/2)<br>
+                    <br>
+                    对x = tany两边关于x求导：1 = sec²y · dy/dx<br>
+                    <br>
+                    因此，dy/dx = 1/sec²y<br>
+                    <br>
+                    利用三角恒等式：sec²y = 1 + tan²y，所以sec²y = 1 + x²<br>
+                    <br>
+                    因此，dy/dx = 1/(1 + x²)<br>
+                    <br>
+                    所以，dy/dx = 1/(1 + x²)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题6：对数求导法</h2>
+            <div class="example-question">
+                <p>求函数y = xˣ的导数（x > 0）。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    这是一个幂指函数，使用对数求导法：<br>
+                    <br>
+                    1. 两边取自然对数：ln|y| = ln|xˣ| = x ln|x|（因为x > 0，所以ln|x| = lnx）<br>
+                    <br>
+                    2. 两边对x求导：(1/y)·y' = lnx + x·(1/x) = lnx + 1<br>
+                    <br>
+                    3. 解出y'：y' = y·(lnx + 1) = xˣ·(lnx + 1)
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>

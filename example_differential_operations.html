@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微分运算 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>微分运算 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div class="example">
+            <h2>例题1：微分运算法则的应用</h2>
+            <div class="example-question">
+                <p>求下列函数的微分：</p>
+                <ol>
+                    <li>y = x³ + 2x² - 5x + 1</li>
+                    <li>y = x²sinx</li>
+                    <li>y = eˣ / x</li>
+                </ol>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    1. 对于y = x³ + 2x² - 5x + 1，使用微分的线性法则：d(u ± v) = du ± dv<br>
+                       dy = d(x³) + d(2x²) - d(5x) + d(1) = 3x²dx + 4xdx - 5dx + 0 = (3x² + 4x - 5)dx<br>
+                    <br>
+                    2. 对于y = x²sinx，使用微分的乘积法则：d(uv) = u dv + v du<br>
+                       令u = x²，v = sinx，则du = 2xdx，dv = cosxdx<br>
+                       dy = x² cosxdx + sinx · 2xdx = x(xcosx + 2sinx)dx<br>
+                    <br>
+                    3. 对于y = eˣ / x，使用微分的商法则：d(u/v) = (v du - u dv) / v²<br>
+                       令u = eˣ，v = x，则du = eˣdx，dv = dx<br>
+                       dy = (x eˣdx - eˣ dx) / x² = eˣ(x - 1)dx / x²
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题2：一阶微分的形式不变性</h2>
+            <div class="example-question">
+                <p>已知y = sin(u)，u = x² + 1，分别用两种方法求dy。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    方法一：先复合再求微分<br>
+                    y = sin(x² + 1)<br>
+                    dy = cos(x² + 1) · d(x² + 1) = cos(x² + 1) · 2xdx = 2x cos(x² + 1)dx<br>
+                    <br>
+                    方法二：利用一阶微分的形式不变性<br>
+                    首先对y = sin(u)求微分：dy = cos(u) du<br>
+                    然后对u = x² + 1求微分：du = 2xdx<br>
+                    将du代入dy的表达式：dy = cos(u) · 2xdx = cos(x² + 1) · 2xdx = 2x cos(x² + 1)dx<br>
+                    <br>
+                    两种方法得到的结果一致，验证了一阶微分的形式不变性。
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题3：隐函数求导法</h2>
+            <div class="example-question">
+                <p>求由方程x² + y² = r²（r为常数）确定的隐函数y = y(x)的导数dy/dx。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    对方程两边同时微分，利用微分的运算法则：<br>
+                    d(x² + y²) = d(r²)<br>
+                    d(x²) + d(y²) = 0<br>
+                    <br>
+                    计算各项微分：<br>
+                    2xdx + 2ydy = 0<br>
+                    <br>
+                    解出dy/dx：<br>
+                    2ydy = -2xdx<br>
+                    dy = (-2x / 2y)dx = (-x / y)dx<br>
+                    <br>
+                    因此，dy/dx = -x / y
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题4：微分的应用 - 近似计算</h2>
+            <div class="example-question">
+                <p>利用微分近似计算sin(31°)的值，已知sin(30°) = 0.5，cos(30°) = √3/2 ≈ 0.8660。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    设f(x) = sinx，取x₀ = 30° = π/6 rad，Δx = 1° = π/180 rad ≈ 0.01745 rad<br>
+                    <br>
+                    首先求f(x)的导数：f'(x) = cosx<br>
+                    <br>
+                    计算f(x₀)和f'(x₀)：<br>
+                    f(π/6) = sin(π/6) = 0.5<br>
+                    f'(π/6) = cos(π/6) = √3/2 ≈ 0.8660<br>
+                    <br>
+                    根据微分近似公式：f(x₀+Δx) ≈ f(x₀) + f'(x₀)Δx<br>
+                    <br>
+                    代入数值：<br>
+                    sin(31°) = sin(π/6 + π/180) ≈ sin(π/6) + cos(π/6)·(π/180)<br>
+                    ≈ 0.5 + 0.8660·0.01745 ≈ 0.5 + 0.01511 ≈ 0.5151<br>
+                    <br>
+                    因此，sin(31°) ≈ 0.5151（精确值约为0.51503807491）
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题5：微分的应用 - 误差估计</h2>
+            <div class="example-question">
+                <p>用卡尺测量球体的直径d = 10cm，测量误差为Δd = ±0.1cm，求球体体积的误差。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    球体的体积公式为：V = (4/3)πr³ = (4/3)π(d/2)³ = (1/6)πd³<br>
+                    <br>
+                    首先求体积V关于直径d的导数：dV/dd = (1/6)π·3d² = (1/2)πd²<br>
+                    <br>
+                    根据微分的定义，体积的误差ΔV ≈ dV = (dV/dd)Δd = (1/2)πd²Δd<br>
+                    <br>
+                    代入数值：d = 10cm，Δd = ±0.1cm<br>
+                    ΔV ≈ (1/2)π·10²·(±0.1) = (1/2)π·100·(±0.1) = 5π·(±0.1) = ±0.5π ≈ ±1.57 cm³<br>
+                    <br>
+                    因此，球体体积的误差约为±1.57 cm³
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>

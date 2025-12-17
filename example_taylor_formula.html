@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor公式 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Taylor公式 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div class="example">
+            <h2>例题1：sinx的Maclaurin展开</h2>
+            <div class="example-question">
+                <p>求函数f(x) = sinx的Maclaurin展开（到x⁵项）</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    Maclaurin展开公式：f(x) = f(0) + f'(0)x + f''(0)/2!·x² + f'''(0)/3!·x³ + f⁽⁴⁾(0)/4!·x⁴ + f⁽⁵⁾(0)/5!·x⁵ + o(x⁵)<br>
+                    <br>
+                    计算各阶导数在x=0处的值：<br>
+                    f(x) = sinx，f(0) = 0<br>
+                    f'(x) = cosx，f'(0) = 1<br>
+                    f''(x) = -sinx，f''(0) = 0<br>
+                    f'''(x) = -cosx，f'''(0) = -1<br>
+                    f⁽⁴⁾(x) = sinx，f⁽⁴⁾(0) = 0<br>
+                    f⁽⁵⁾(x) = cosx，f⁽⁵⁾(0) = 1<br>
+                    <br>
+                    代入Maclaurin公式：<br>
+                    sinx = 0 + 1·x + 0/2!·x² + (-1)/3!·x³ + 0/4!·x⁴ + 1/5!·x⁵ + o(x⁵)<br>
+                    <br>
+                    化简得：<br>
+                    sinx = x - x³/6 + x⁵/120 + o(x⁵)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题2：cosx的Maclaurin展开</h2>
+            <div class="example-question">
+                <p>求函数f(x) = cosx的Maclaurin展开（到x⁶项）</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    Maclaurin展开公式：f(x) = f(0) + f'(0)x + f''(0)/2!·x² + f'''(0)/3!·x³ + f⁽⁴⁾(0)/4!·x⁴ + f⁽⁵⁾(0)/5!·x⁵ + f⁽⁶⁾(0)/6!·x⁶ + o(x⁶)<br>
+                    <br>
+                    计算各阶导数在x=0处的值：<br>
+                    f(x) = cosx，f(0) = 1<br>
+                    f'(x) = -sinx，f'(0) = 0<br>
+                    f''(x) = -cosx，f''(0) = -1<br>
+                    f'''(x) = sinx，f'''(0) = 0<br>
+                    f⁽⁴⁾(x) = cosx，f⁽⁴⁾(0) = 1<br>
+                    f⁽⁵⁾(x) = -sinx，f⁽⁵⁾(0) = 0<br>
+                    f⁽⁶⁾(x) = -cosx，f⁽⁶⁾(0) = -1<br>
+                    <br>
+                    代入Maclaurin公式：<br>
+                    cosx = 1 + 0·x + (-1)/2!·x² + 0/3!·x³ + 1/4!·x⁴ + 0/5!·x⁵ + (-1)/6!·x⁶ + o(x⁶)<br>
+                    <br>
+                    化简得：<br>
+                    cosx = 1 - x²/2 + x⁴/24 - x⁶/720 + o(x⁶)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题3：eˣ的Maclaurin展开</h2>
+            <div class="example-question">
+                <p>求函数f(x) = eˣ的Maclaurin展开（到x⁴项）</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    Maclaurin展开公式：f(x) = f(0) + f'(0)x + f''(0)/2!·x² + f'''(0)/3!·x³ + f⁽⁴⁾(0)/4!·x⁴ + o(x⁴)<br>
+                    <br>
+                    由于eˣ的所有阶导数都是eˣ，因此：<br>
+                    f⁽ⁿ⁾(x) = eˣ，f⁽ⁿ⁾(0) = e⁰ = 1（对所有n）<br>
+                    <br>
+                    代入Maclaurin公式：<br>
+                    eˣ = 1 + 1·x + 1/2!·x² + 1/3!·x³ + 1/4!·x⁴ + o(x⁴)<br>
+                    <br>
+                    化简得：<br>
+                    eˣ = 1 + x + x²/2 + x³/6 + x⁴/24 + o(x⁴)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题4：ln(1+x)的Maclaurin展开</h2>
+            <div class="example-question">
+                <p>求函数f(x) = ln(1+x)的Maclaurin展开（到x⁴项）</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    Maclaurin展开公式：f(x) = f(0) + f'(0)x + f''(0)/2!·x² + f'''(0)/3!·x³ + f⁽⁴⁾(0)/4!·x⁴ + o(x⁴)<br>
+                    <br>
+                    计算各阶导数在x=0处的值：<br>
+                    f(x) = ln(1+x)，f(0) = 0<br>
+                    f'(x) = 1/(1+x)，f'(0) = 1<br>
+                    f''(x) = -1/(1+x)²，f''(0) = -1<br>
+                    f'''(x) = 2/(1+x)³，f'''(0) = 2<br>
+                    f⁽⁴⁾(x) = -6/(1+x)⁴，f⁽⁴⁾(0) = -6<br>
+                    <br>
+                    代入Maclaurin公式：<br>
+                    ln(1+x) = 0 + 1·x + (-1)/2!·x² + 2/3!·x³ + (-6)/4!·x⁴ + o(x⁴)<br>
+                    <br>
+                    化简得：<br>
+                    ln(1+x) = x - x²/2 + x³/3 - x⁴/4 + o(x⁴)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题5：(1+x)^α的Maclaurin展开</h2>
+            <div class="example-question">
+                <p>求函数f(x) = (1+x)^α的Maclaurin展开（到x³项），其中α为常数</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    Maclaurin展开公式：f(x) = f(0) + f'(0)x + f''(0)/2!·x² + f'''(0)/3!·x³ + o(x³)<br>
+                    <br>
+                    计算各阶导数在x=0处的值：<br>
+                    f(x) = (1+x)^α，f(0) = 1<br>
+                    f'(x) = α(1+x)^(α-1)，f'(0) = α<br>
+                    f''(x) = α(α-1)(1+x)^(α-2)，f''(0) = α(α-1)<br>
+                    f'''(x) = α(α-1)(α-2)(1+x)^(α-3)，f'''(0) = α(α-1)(α-2)<br>
+                    <br>
+                    代入Maclaurin公式：<br>
+                    (1+x)^α = 1 + αx + α(α-1)/2!·x² + α(α-1)(α-2)/3!·x³ + o(x³)<br>
+                    <br>
+                    化简得：<br>
+                    (1+x)^α = 1 + αx + α(α-1)x²/2 + α(α-1)(α-2)x³/6 + o(x³)
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>

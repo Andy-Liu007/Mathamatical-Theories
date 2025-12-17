@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathamatical Thoeries - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #2ecc71;
+            margin: 20px 0 15px 0;
+            font-size: 1.4em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .example-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .example-solution {
+            margin: 15px 0;
+            padding-left: 20px;
+            border-left: 3px solid #2ecc71;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Mathamatical Thoeries - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <!-- 数列极限的定义例题 -->
+        <h2>数列极限的定义例题</h2>
+        
+        <div class="example">
+            <div class="example-title">例题1：用ε-N定义证明limₙ→∞ (3n+1)/(2n-1) = 3/2</div>
+            <div class="example-math">
+                证明：∀ε > 0，∃N ∈ ℕ，当n > N时，|(3n+1)/(2n-1) - 3/2| < ε
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="example-math">
+                    计算|(3n+1)/(2n-1) - 3/2| = |5/(4n-2)|<br>
+                    对于任意ε > 0，取N = [ (5/ε + 2)/4 ] + 1<br>
+                    当n > N时，|(3n+1)/(2n-1) - 3/2| = 5/(4n-2) < ε
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <div class="example-title">例题2：用ε-N定义证明limₙ→∞ 1/n² = 0</div>
+            <div class="example-math">
+                证明：∀ε > 0，∃N ∈ ℕ，当n > N时，|1/n² - 0| < ε
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="example-math">
+                    |1/n² - 0| = 1/n² < ε ⇒ n > √(1/ε)<br>
+                    取N = [√(1/ε)] + 1，当n > N时，1/n² < ε
+                </div>
+            </div>
+        </div>
+        
+        <!-- 函数极限的唯一性例题 -->
+        <h2>函数极限的唯一性例题</h2>
+        
+        <div class="example">
+            <div class="example-title">例题1：验证函数f(x) = (x² - 4)/(x - 2)在x→2时的极限唯一性</div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="example-math">
+                    当x ≠ 2时，f(x) = x + 2<br>
+                    limₓ→2 f(x) = limₓ→2 (x + 2) = 4<br>
+                    由函数极限的唯一性定理，该极限唯一
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高阶导数 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>高阶导数 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div class="example">
+            <h2>例题1：求函数的高阶导数</h2>
+            <div class="example-question">
+                <p>求函数f(x) = x³ + 2x² - 5x + 1的一阶、二阶和三阶导数。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先求一阶导数：<br>
+                    f'(x) = 3x² + 4x - 5<br>
+                    <br>
+                    然后求二阶导数：<br>
+                    f''(x) = (f'(x))' = (3x² + 4x - 5)' = 6x + 4<br>
+                    <br>
+                    最后求三阶导数：<br>
+                    f'''(x) = (f''(x))' = (6x + 4)' = 6<br>
+                    <br>
+                    因此，f'(x) = 3x² + 4x - 5，f''(x) = 6x + 4，f'''(x) = 6
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题2：常见函数的高阶导数</h2>
+            <div class="example-question">
+                <p>求下列函数的n阶导数：</p>
+                <ol>
+                    <li>f(x) = eˣ</li>
+                    <li>g(x) = sinx</li>
+                    <li>h(x) = cosx</li>
+                    <li>k(x) = lnx</li>
+                </ol>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    1. 对于f(x) = eˣ，其导数保持不变：<br>
+                       f⁽ⁿ⁾(x) = eˣ<br>
+                    <br>
+                    2. 对于g(x) = sinx，其n阶导数具有周期性：<br>
+                       g⁽ⁿ⁾(x) = sin(x + nπ/2)<br>
+                    <br>
+                    3. 对于h(x) = cosx，其n阶导数也具有周期性：<br>
+                       h⁽ⁿ⁾(x) = cos(x + nπ/2)<br>
+                    <br>
+                    4. 对于k(x) = lnx，其n阶导数为：<br>
+                       k⁽ⁿ⁾(x) = (-1)ⁿ⁻¹ (n-1)! / xⁿ
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题3：Leibniz公式的应用</h2>
+            <div class="example-question">
+                <p>使用Leibniz公式求函数y = x²eˣ的三阶导数。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    Leibniz公式：(uv)⁽ⁿ⁾ = Σₖ=₀ⁿ Cₙᵏ u⁽ⁿ⁻ᵏ⁾ v⁽ᵏ⁾，其中Cₙᵏ是组合数<br>
+                    <br>
+                    令u = x²，v = eˣ，则需要计算u的各阶导数和v的各阶导数：<br>
+                    <br>
+                    u的各阶导数：<br>
+                    u = x²<br>
+                    u' = 2x<br>
+                    u'' = 2<br>
+                    u''' = 0<br>
+                    u⁽ᵏ⁾ = 0 (k ≥ 4)<br>
+                    <br>
+                    v = eˣ的各阶导数：<br>
+                    v⁽ᵏ⁾ = eˣ (对任意k ≥ 0)<br>
+                    <br>
+                    使用Leibniz公式计算三阶导数：<br>
+                    y''' = (x²eˣ)''' = Σₖ=₀³ C₃ᵏ (x²)⁽³⁻ᵏ⁾ (eˣ)⁽ᵏ⁾<br>
+                    <br>
+                    展开求和：<br>
+                    y''' = C₃⁰ (x²)''' eˣ + C₃¹ (x²)'' (eˣ)' + C₃² (x²)' (eˣ)'' + C₃³ (x²) (eˣ)'''<br>
+                    <br>
+                    计算各组合数：<br>
+                    C₃⁰ = 1, C₃¹ = 3, C₃² = 3, C₃³ = 1<br>
+                    <br>
+                    代入各阶导数：<br>
+                    y''' = 1·0·eˣ + 3·2·eˣ + 3·2x·eˣ + 1·x²·eˣ<br>
+                    y''' = 0 + 6eˣ + 6xeˣ + x²eˣ<br>
+                    y''' = eˣ(x² + 6x + 6)<br>
+                    <br>
+                    因此，y''' = eˣ(x² + 6x + 6)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题4：Leibniz公式的进一步应用</h2>
+            <div class="example-question">
+                <p>求函数y = xsinx的四阶导数。</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    使用Leibniz公式：(uv)⁽ⁿ⁾ = Σₖ=₀ⁿ Cₙᵏ u⁽ⁿ⁻ᵏ⁾ v⁽ᵏ⁾<br>
+                    <br>
+                    令u = x，v = sinx，则：<br>
+                    <br>
+                    u的各阶导数：<br>
+                    u = x<br>
+                    u' = 1<br>
+                    u'' = 0<br>
+                    u''' = 0<br>
+                    u⁽⁴⁾ = 0<br>
+                    <br>
+                    v = sinx的各阶导数：<br>
+                    v = sinx<br>
+                    v' = cosx = sin(x + π/2)<br>
+                    v'' = -sinx = sin(x + π)<br>
+                    v''' = -cosx = sin(x + 3π/2)<br>
+                    v⁽⁴⁾ = sinx = sin(x + 2π)<br>
+                    <br>
+                    使用Leibniz公式计算四阶导数：<br>
+                    y⁽⁴⁾ = (xsinx)⁽⁴⁾ = Σₖ=₀⁴ C₄ᵏ (x)⁽⁴⁻ᵏ⁾ (sinx)⁽ᵏ⁾<br>
+                    <br>
+                    展开求和：<br>
+                    y⁽⁴⁾ = C₄⁰ (x)⁽⁴⁾ sinx + C₄¹ (x)⁽³⁾ (sinx)' + C₄² (x)'' (sinx)'' + C₄³ (x)' (sinx)''' + C₄⁴ (x) (sinx)⁽⁴⁾<br>
+                    <br>
+                    计算各组合数：<br>
+                    C₄⁰ = 1, C₄¹ = 4, C₄² = 6, C₄³ = 4, C₄⁴ = 1<br>
+                    <br>
+                    代入各阶导数：<br>
+                    y⁽⁴⁾ = 1·0·sinx + 4·0·cosx + 6·0·(-sinx) + 4·1·(-cosx) + 1·x·sinx<br>
+                    y⁽⁴⁾ = 0 + 0 + 0 - 4cosx + xsinx<br>
+                    y⁽⁴⁾ = xsinx - 4cosx<br>
+                    <br>
+                    因此，y⁽⁴⁾ = xsinx - 4cosx
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>

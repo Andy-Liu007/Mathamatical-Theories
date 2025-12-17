@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数列极限 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>数列极限 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div class="example" id="example-1">
+            <h2>例题1：用ε-N定义证明数列极限</h2>
+            <div class="example-question">
+                <p>使用ε-N定义证明：limₙ→∞ (2n+1)/(3n-2) = 2/3</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先计算|(2n+1)/(3n-2) - 2/3|：<br>
+                    |(2n+1)/(3n-2) - 2/3| = |[3(2n+1) - 2(3n-2)]/[3(3n-2)]| = |(6n+3 - 6n+4)/(9n-6)| = |7/(9n-6)|<br>
+                    <br>
+                    对于任意给定的ε > 0，我们需要找到N ∈ ℕ，使得当n > N时：<br>
+                    |7/(9n-6)| < ε<br>
+                    <br>
+                    化简不等式：7/(9n-6) < ε ⇒ 9n - 6 > 7/ε ⇒ n > (7/ε + 6)/9<br>
+                    <br>
+                    取N = [ (7/ε + 6)/9 ] + 1（其中[·]表示取整函数），则当n > N时：<br>
+                    |(2n+1)/(3n-2) - 2/3| = 7/(9n-6) < 7/(9N-6) < ε<br>
+                    <br>
+                    因此，根据ε-N定义，limₙ→∞ (2n+1)/(3n-2) = 2/3
+                </div>
+            </div>
+        </div>
+        
+        <div class="example" id="example-2">
+            <h2>例题2：数列极限的四则运算</h2>
+            <div class="example-question">
+                <p>已知limₙ→∞ aₙ = 3，limₙ→∞ bₙ = 5，求limₙ→∞ (2aₙ - 3bₙ + 7)</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    根据数列极限的四则运算法则：<br>
+                    limₙ→∞ (2aₙ - 3bₙ + 7) = 2·limₙ→∞ aₙ - 3·limₙ→∞ bₙ + limₙ→∞ 7<br>
+                    <br>
+                    代入已知极限值：<br>
+                    = 2·3 - 3·5 + 7<br>
+                    = 6 - 15 + 7<br>
+                    = -2<br>
+                    <br>
+                    因此，limₙ→∞ (2aₙ - 3bₙ + 7) = -2
+                </div>
+            </div>
+        </div>
+        
+        <div class="example" id="example-3">
+            <h2>例题3：夹逼准则的应用</h2>
+            <div class="example-question">
+                <p>求limₙ→∞ (n!)/(nⁿ)</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先注意到n! = 1·2·3·...·n，而nⁿ = n·n·n·...·n<br>
+                    <br>
+                    因此，当n ≥ 2时，n! = 1·2·3·...·n ≤ 1·n·n·...·n = nⁿ⁻¹<br>
+                    且n! ≥ 1·2·1·...·1 = 2（当n ≥ 2时）<br>
+                    <br>
+                    但更精确的估计是：<br>
+                    当n ≥ 2时，n! = 1·2·3·...·n ≤ 1·n·n·...·n = nⁿ⁻¹<br>
+                    且n! ≥ 1·n·1·...·1 = n<br>
+                    <br>
+                    因此，我们有：n ≤ n! ≤ nⁿ⁻¹<br>
+                    两边除以nⁿ：1/nⁿ⁻¹ ≤ n!/nⁿ ≤ 1/n<br>
+                    <br>
+                    由于limₙ→∞ 1/nⁿ⁻¹ = 0，limₙ→∞ 1/n = 0<br>
+                    根据夹逼准则，limₙ→∞ (n!)/nⁿ = 0
+                </div>
+            </div>
+        </div>
+        
+        <div class="example" id="example-4">
+            <h2>例题4：Cauchy收敛准则的应用</h2>
+            <div class="example-question">
+                <p>证明数列aₙ = 1 + 1/2 + 1/3 + ... + 1/n发散（调和级数）</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    使用Cauchy收敛准则的否定形式：数列{aₙ}发散 ⇨ ∃ε₀ > 0，∀N ∈ ℕ，∃m, n > N，使得|aₘ - aₙ| ≥ ε₀<br>
+                    <br>
+                    取ε₀ = 1/2，对于任意N ∈ ℕ，取n = N + 1，m = 2N + 2<br>
+                    则|aₘ - aₙ| = |(1 + 1/2 + ... + 1/(2N+2)) - (1 + 1/2 + ... + 1/(N+1))| = |1/(N+2) + 1/(N+3) + ... + 1/(2N+2)|<br>
+                    <br>
+                    注意到共有N+1项，每项都 ≥ 1/(2N+2)，因此：<br>
+                    |aₘ - aₙ| ≥ (N+1)·1/(2N+2) = (N+1)/(2(N+1)) = 1/2 = ε₀<br>
+                    <br>
+                    因此，根据Cauchy收敛准则的否定形式，调和级数发散
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>

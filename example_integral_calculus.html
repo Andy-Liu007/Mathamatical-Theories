@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一元函数积分学 - 例题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            color: #2ecc71;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .example-question {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .example-solution {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .node-math {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Cambria Math', 'Times New Roman', Times, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            border-left: 3px solid #3498db;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .return-main {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px auto;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+        
+        .return-main:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            line-height: 1.2;
+        }
+        .frac .num,
+        .frac .den {
+            padding: 0 4px;
+        }
+        .frac .bar {
+            display: block;
+            width: 100%;
+            border-top: 1px solid #333;
+            margin: 2px 0;
+        }
+    </style>
+    <script defer>
+        (function () {
+            var re = /(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)\s*\/\s*(\([^\)]+\)|\[[^\]]+\]|\|[^|]+\||√\([^\)]+\)|\{[^}]+\}|[A-Za-zα-ωΑ-Ω0-9₀-₉ₙₓ\u2070-\u209F]+)/g;
+            var nodes = document.querySelectorAll('.node-math, .example-math');
+            for (var i = 0; i < nodes.length; i++) {
+                var html = nodes[i].innerHTML;
+                html = html.replace(re, function (_, num, den) {
+                    return '<span class="frac"><span class="num">' + num + '</span><span class="bar"></span><span class="den">' + den + '</span></span>';
+                });
+                nodes[i].innerHTML = html;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>一元函数积分学 - 例题</h1>
+        
+        <a href="Maths.html" class="back-link">返回主页面</a>
+        
+        <div id="fundamental-theorem" class="example">
+            <h2>例题1：微积分基本定理第一部分 - 变上限积分的导数</h2>
+            <div class="example-question">
+                <p>设f(t) = 2t + 1，定义变上限积分Φ(x) = ∫₁ˣ(2t + 1)dt，验证Φ'(x) = f(x)</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先计算Φ(x)：<br>
+                    Φ(x) = ∫₁ˣ(2t + 1)dt = [t² + t]₁ˣ = (x² + x) - (1² + 1) = x² + x - 2<br>
+                    <br>
+                    然后求导：<br>
+                    Φ'(x) = d/dx(x² + x - 2) = 2x + 1 = f(x)<br>
+                    <br>
+                    这验证了微积分基本定理第一部分：若f在区间上连续，则变上限积分Φ(x) = ∫ₐˣf(t)dt的导数等于被积函数f(x)
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h2>例题2：微积分基本定理第二部分 - 牛顿-莱布尼茨公式</h2>
+            <div class="example-question">
+                <p>设f(x) = 3x²，已知F(x) = x³是f(x)的一个原函数，利用牛顿-莱布尼茨公式计算∫₀²3x²dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    根据微积分基本定理第二部分（牛顿-莱布尼茨公式）：<br>
+                    若F(x)是连续函数f(x)在区间[a,b]上的一个原函数，则∫ₐᵇf(x)dx = F(b) - F(a)<br>
+                    <br>
+                    这里F(x) = x³，a = 0，b = 2<br>
+                    所以∫₀²3x²dx = F(2) - F(0) = 2³ - 0³ = 8 - 0 = 8
+                    <br>
+                    可以通过计算定积分验证：∫₀²3x²dx = [x³]₀² = 8，结果一致
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h2>例题3：不定积分的计算 - 直接积分</h2>
+            <div class="example-question">
+                <p>计算不定积分∫(3x² + 2x + 5)dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    ∫(3x² + 2x + 5)dx = 3∫x²dx + 2∫xdx + 5∫dx<br>
+                    = 3·x³/3 + 2·x²/2 + 5x + C<br>
+                    = x³ + x² + 5x + C<br>
+                    其中C为积分常数
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题4：不定积分的计算 - 第一类换元积分</h2>
+            <div class="example-question">
+                <p>计算不定积分∫2x(x² + 1)^3dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    令u = x² + 1，则du = 2xdx<br>
+                    ∫2x(x² + 1)^3dx = ∫u^3du<br>
+                    = u^4/4 + C<br>
+                    = (x² + 1)^4/4 + C<br>
+                    其中C为积分常数
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题5：不定积分的计算 - 第二类换元积分</h2>
+            <div class="example-question">
+                <p>计算不定积分∫√(a² - x²)dx (a > 0)</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    令x = a sin t，t ∈ [-π/2, π/2]，则dx = a cos t dt<br>
+                    √(a² - x²) = √(a² - a² sin² t) = a cos t<br>
+                    <br>
+                    ∫√(a² - x²)dx = ∫a cos t · a cos t dt<br>
+                    = a² ∫cos² t dt<br>
+                    = a² ∫(1 + cos 2t)/2 dt<br>
+                    = a²/2 [t + sin 2t/2] + C<br>
+                    = a²/2 [t + sin t cos t] + C<br>
+                    <br>
+                    由于x = a sin t，所以t = arcsin(x/a)，sin t = x/a，cos t = √(a² - x²)/a<br>
+                    代入得：<br>
+                    = a²/2 [arcsin(x/a) + (x/a)·(√(a² - x²)/a)] + C<br>
+                    = (a²/2)arcsin(x/a) + (x√(a² - x²))/2 + C<br>
+                    其中C为积分常数
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题6：不定积分的计算 - 分部积分</h2>
+            <div class="example-question">
+                <p>计算不定积分∫x e^x dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    设u = x，dv = e^x dx，则du = dx，v = e^x<br>
+                    <br>
+                    根据分部积分公式：∫u dv = uv - ∫v du<br>
+                    ∫x e^x dx = x e^x - ∫e^x dx<br>
+                    = x e^x - e^x + C<br>
+                    = e^x(x - 1) + C<br>
+                    其中C为积分常数
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题5：定积分的计算 - 牛顿-莱布尼茨公式</h2>
+            <div class="example-question">
+                <p>计算定积分∫₀¹(3x² + 2x)dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先求原函数：∫(3x² + 2x)dx = x³ + x² + C<br>
+                    <br>
+                    根据牛顿-莱布尼茨公式：∫ₐᵇf(x)dx = F(b) - F(a)<br>
+                    ∫₀¹(3x² + 2x)dx = (1³ + 1²) - (0³ + 0²) = 2 - 0 = 2
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题6：定积分的计算 - 利用对称性</h2>
+            <div class="example-question">
+                <p>计算定积分∫₋π^π(x³ + sin x)dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    由于f(x) = x³ + sin x是奇函数（f(-x) = -f(x)），且积分区间[-π, π]关于原点对称<br>
+                    根据奇函数在对称区间上的积分性质：∫₋a^a f(x)dx = 0（f为奇函数）<br>
+                    因此∫₋π^π(x³ + sin x)dx = 0
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题7：定积分的应用 - 平面图形的面积</h2>
+            <div class="example-question">
+                <p>求由曲线y = x²和y = √x围成的平面图形的面积</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先求两曲线的交点：x² = √x ⇒ x⁴ = x ⇒ x(x³ - 1) = 0 ⇒ x = 0 或 x = 1<br>
+                    因此积分区间为[0, 1]<br>
+                    <br>
+                    面积A = ∫₀¹(√x - x²)dx<br>
+                    = ∫₀¹(x^(1/2) - x²)dx<br>
+                    = [ (2/3)x^(3/2) - (1/3)x³ ]₀¹<br>
+                    = (2/3 - 1/3) - (0 - 0) = 1/3
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题8：定积分的应用 - 旋转体的体积</h2>
+            <div class="example-question">
+                <p>求由曲线y = x²，x轴和直线x = 2围成的平面图形绕x轴旋转一周形成的旋转体体积</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    根据旋转体体积公式：V = π∫ₐᵇf²(x)dx<br>
+                    这里f(x) = x²，积分区间为[0, 2]<br>
+                    <br>
+                    V = π∫₀²(x²)²dx = π∫₀²x⁴dx<br>
+                    = π[ (1/5)x⁵ ]₀²<br>
+                    = π(32/5 - 0) = 32π/5
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题9：定积分的应用 - 极坐标下的平面图形面积</h2>
+            <div class="example-question">
+                <p>求心形线r = a(1 + cosθ) (a > 0)所围成的平面图形的面积</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    极坐标下平面图形的面积公式：A = (1/2)∫α^β r² dθ<br>
+                    <br>
+                    心形线关于极轴对称，θ的范围是[-π, π]，利用对称性计算：<br>
+                    A = 2 × (1/2)∫₀^π [a(1 + cosθ)]² dθ = a²∫₀^π (1 + 2cosθ + cos²θ) dθ<br>
+                    <br>
+                    利用三角恒等式cos²θ = (1 + cos2θ)/2：<br>
+                    A = a²∫₀^π [1 + 2cosθ + (1 + cos2θ)/2] dθ<br>
+                    = a²∫₀^π [3/2 + 2cosθ + (cos2θ)/2] dθ<br>
+                    = a²[ (3/2)θ + 2sinθ + (sin2θ)/4 ]₀^π<br>
+                    = a²[ (3π/2 + 0 + 0) - (0 + 0 + 0) ] = (3/2)πa²
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题10：定积分的应用 - 参数方程下的平面图形面积</h2>
+            <div class="example-question">
+                <p>求椭圆x = a cos t, y = b sin t (a, b > 0)所围成的平面图形的面积</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    参数方程下平面图形的面积公式：A = ∫α^β y(t) x'(t) dt<br>
+                    <br>
+                    椭圆关于x轴和y轴对称，θ的范围是[0, 2π]：<br>
+                    x'(t) = -a sin t<br>
+                    <br>
+                    A = ∫₀^(2π) b sin t × (-a sin t) dt = ab∫₀^(2π) sin²t dt<br>
+                    <br>
+                    利用三角恒等式sin²t = (1 - cos2t)/2：<br>
+                    A = ab∫₀^(2π) (1 - cos2t)/2 dt = (ab/2)∫₀^(2π) (1 - cos2t) dt<br>
+                    = (ab/2)[t - (sin2t)/2]₀^(2π)<br>
+                    = (ab/2)[(2π - 0) - (0 - 0)] = πab
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题11：定积分的应用 - 绕y轴旋转的旋转体体积</h2>
+            <div class="example-question">
+                <p>求由曲线y = x²，y轴和直线y = 4围成的平面图形绕y轴旋转一周形成的旋转体体积</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    方法一：切片法（对y积分）<br>
+                    体积公式：V = π∫ₐᵇx²(y) dy<br>
+                    <br>
+                    由y = x²得x = √y，积分区间为[0, 4]：<br>
+                    V = π∫₀^4(√y)² dy = π∫₀^4y dy = π[ (1/2)y² ]₀^4 = π(8 - 0) = 8π<br>
+                    <br>
+                    方法二：圆柱壳法<br>
+                    体积公式：V = 2π∫ₐᵇx f(x) dx<br>
+                    <br>
+                    积分区间为[0, 2]：<br>
+                    V = 2π∫₀^2x × x² dx = 2π∫₀^2x³ dx = 2π[ (1/4)x⁴ ]₀^2 = 2π(4 - 0) = 8π
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题12：定积分的应用 - 旋转体的表面积</h2>
+            <div class="example-question">
+                <p>求由曲线y = √x，x轴和直线x = 4围成的平面图形绕x轴旋转一周形成的旋转体的表面积</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    旋转体表面积公式：S = 2π∫ₐᵇy√(1 + (y')²) dx<br>
+                    <br>
+                    首先求导数：y = √x，y' = 1/(2√x)<br>
+                    <br>
+                    √(1 + (y')²) = √(1 + 1/(4x)) = √((4x + 1)/(4x)) = √(4x + 1)/(2√x)<br>
+                    <br>
+                    表面积S = 2π∫₀^4√x × √(4x + 1)/(2√x) dx = π∫₀^4√(4x + 1) dx<br>
+                    <br>
+                    令u = 4x + 1，则du = 4dx，当x=0时u=1，x=4时u=17：<br>
+                    S = π×(1/4)∫₁^17√u du = (π/4)[ (2/3)u^(3/2) ]₁^17<br>
+                    = (π/6)[17^(3/2) - 1^(3/2)] = (π/6)(17√17 - 1)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题13：定积分的应用 - 平面曲线的弧长（直角坐标系）</h2>
+            <div class="example-question">
+                <p>求曲线y = (2/3)x^(3/2)从x=0到x=3的弧长</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    直角坐标系下弧长公式：L = ∫ₐᵇ√(1 + (y')²) dx<br>
+                    <br>
+                    首先求导数：y = (2/3)x^(3/2)，y' = x^(1/2)<br>
+                    <br>
+                    √(1 + (y')²) = √(1 + x)<br>
+                    <br>
+                    弧长L = ∫₀^3√(1 + x) dx<br>
+                    令u = 1 + x，则du = dx，当x=0时u=1，x=3时u=4：<br>
+                    L = ∫₁^4√u du = [ (2/3)u^(3/2) ]₁^4 = (2/3)(8 - 1) = 14/3
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题14：定积分的应用 - 平面曲线的弧长（参数方程）</h2>
+            <div class="example-question">
+                <p>求摆线x = a(t - sin t), y = a(1 - cos t) (a > 0)一拱（t从0到2π）的弧长</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    参数方程下弧长公式：L = ∫α^β√[(x'(t))² + (y'(t))²] dt<br>
+                    <br>
+                    首先求导数：x' = a(1 - cos t), y' = a sin t<br>
+                    <br>
+                    (x')² + (y')² = a²(1 - 2cos t + cos²t + sin²t) = a²(2 - 2cos t) = 4a² sin²(t/2)<br>
+                    <br>
+                    √[(x')² + (y'(t))²] = 2a sin(t/2)（因为t∈[0, 2π]，sin(t/2)≥0）<br>
+                    <br>
+                    弧长L = ∫₀^(2π)2a sin(t/2) dt = 2a×[-2cos(t/2)]₀^(2π) = -4a(cosπ - cos0) = -4a(-1 - 1) = 8a
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题15：定积分的应用 - 平面曲线的弧长（极坐标）</h2>
+            <div class="example-question">
+                <p>求对数螺线r = e^(aθ) (a > 0)从θ=0到θ=2π的弧长</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    极坐标下弧长公式：L = ∫α^β√(r² + (dr/dθ)²) dθ<br>
+                    <br>
+                    首先求导数：dr/dθ = a e^(aθ)<br>
+                    <br>
+                    r² + (dr/dθ)² = e^(2aθ) + a² e^(2aθ) = e^(2aθ)(1 + a²)<br>
+                    <br>
+                    √(r² + (dr/dθ)²) = e^(aθ)√(1 + a²)<br>
+                    <br>
+                    弧长L = ∫₀^(2π)e^(aθ)√(1 + a²) dθ = √(1 + a²)[ (1/a)e^(aθ) ]₀^(2π) = (√(1 + a²)/a)(e^(2aπ) - 1)
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题16：反常积分的计算</h2>
+            <div class="example-question">
+                <p>判断反常积分∫₁^+∞(1/x²)dx的收敛性，若收敛则计算其值</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    根据无穷限反常积分的定义：∫ₐ^+∞f(x)dx = limₜ→+∞∫ₐᵗf(x)dx<br>
+                    <br>
+                    ∫₁^+∞(1/x²)dx = limₜ→+∞∫₁ᵗ(1/x²)dx<br>
+                    = limₜ→+∞[ -1/x ]₁ᵗ<br>
+                    = limₜ→+∞( -1/t + 1/1 )<br>
+                    = 0 + 1 = 1<br>
+                    <br>
+                    因此，该反常积分收敛，其值为1
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>例题17：定积分的近似计算 - 梯形法</h2>
+            <div class="example-question">
+                <p>用梯形法计算定积分∫₀¹e^x dx的近似值，取n = 4</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先确定步长：h = (b - a)/n = (1 - 0)/4 = 0.25<br>
+                    节点：x₀ = 0, x₁ = 0.25, x₂ = 0.5, x₃ = 0.75, x₄ = 1<br>
+                    <br>
+                    根据梯形法公式：∫ₐᵇf(x)dx ≈ (h/2)[f(x₀) + 2f(x₁) + 2f(x₂) + ... + 2f(xₙ₋₁) + f(xₙ)]<br>
+                    <br>
+                    计算各节点的函数值：<br>
+                    f(x₀) = e^0 = 1<br>
+                    f(x₁) = e^0.25 ≈ 1.2840<br>
+                    f(x₂) = e^0.5 ≈ 1.6487<br>
+                    f(x₃) = e^0.75 ≈ 2.1170<br>
+                    f(x₄) = e^1 ≈ 2.7183<br>
+                    <br>
+                    代入公式：<br>
+                    ∫₀¹e^x dx ≈ (0.25/2)[1 + 2×1.2840 + 2×1.6487 + 2×2.1170 + 2.7183]<br>
+                    ≈ 0.125[1 + 2.5680 + 3.2974 + 4.2340 + 2.7183]<br>
+                    ≈ 0.125×13.8177 ≈ 1.7272<br>
+                    <br>
+                    精确值为e - 1 ≈ 1.7183（由微积分基本定理计算得出），近似误差约为0.0089
+                </div>
+            </div>
+        </div>
+        
+        <a href="Maths.html" class="return-main">返回主页面</a>
+    </div>
+</body>
+</html>
