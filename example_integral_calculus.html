@@ -152,8 +152,141 @@
         
         <a href="Maths.html" class="back-link">返回主页面</a>
         
+        <div id="riemann-sum" class="example">
+            <h2>例题1：黎曼和计算 - 左端点法</h2>
+            <div class="example-question">
+                <p>用左端点法计算定积分∫₀²x²dx的黎曼和近似值，取n = 4</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    首先确定步长：Δx = (b - a)/n = (2 - 0)/4 = 0.5<br>
+                    分割区间：[0, 0.5], [0.5, 1], [1, 1.5], [1.5, 2]<br>
+                    左端点：x₀ = 0, x₁ = 0.5, x₂ = 1, x₃ = 1.5<br>
+                    <br>
+                    左黎曼和公式：Lₙ = ΔxΣₖ=₀ⁿ⁻¹f(xₖ)<br>
+                    <br>
+                    计算各左端点的函数值：<br>
+                    f(x₀) = 0² = 0<br>
+                    f(x₁) = 0.5² = 0.25<br>
+                    f(x₂) = 1² = 1<br>
+                    f(x₃) = 1.5² = 2.25<br>
+                    <br>
+                    左黎曼和：L₄ = 0.5×(0 + 0.25 + 1 + 2.25) = 0.5×3.5 = 1.75<br>
+                    <br>
+                    精确值：∫₀²x²dx = [x³/3]₀² = 8/3 ≈ 2.6667，左黎曼和为近似值
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h2>例题2：黎曼和计算 - 右端点法</h2>
+            <div class="example-question">
+                <p>用右端点法计算定积分∫₀²x²dx的黎曼和近似值，取n = 4</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    步长Δx = 0.5，分割区间同左端点法<br>
+                    右端点：x₁ = 0.5, x₂ = 1, x₃ = 1.5, x₄ = 2<br>
+                    <br>
+                    右黎曼和公式：Rₙ = ΔxΣₖ=₁ⁿf(xₖ)<br>
+                    <br>
+                    计算各右端点的函数值：<br>
+                    f(x₁) = 0.5² = 0.25<br>
+                    f(x₂) = 1² = 1<br>
+                    f(x₃) = 1.5² = 2.25<br>
+                    f(x₄) = 2² = 4<br>
+                    <br>
+                    右黎曼和：R₄ = 0.5×(0.25 + 1 + 2.25 + 4) = 0.5×7.5 = 3.75<br>
+                    <br>
+                    精确值约为2.6667，右端点法高估了积分值（因为函数x²在[0,2]上递增）
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h2>例题3：黎曼和计算 - 中点法</h2>
+            <div class="example-question">
+                <p>用中点法计算定积分∫₀²x²dx的黎曼和近似值，取n = 4</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    步长Δx = 0.5，分割区间同前<br>
+                    中点：x₁' = 0.25, x₂' = 0.75, x₃' = 1.25, x₄' = 1.75<br>
+                    <br>
+                    中点法公式：Mₙ = ΔxΣₖ=₁ⁿf((xₖ₋₁ + xₖ)/2)<br>
+                    <br>
+                    计算各中点的函数值：<br>
+                    f(0.25) = 0.25² = 0.0625<br>
+                    f(0.75) = 0.75² = 0.5625<br>
+                    f(1.25) = 1.25² = 1.5625<br>
+                    f(1.75) = 1.75² = 3.0625<br>
+                    <br>
+                    中点黎曼和：M₄ = 0.5×(0.0625 + 0.5625 + 1.5625 + 3.0625) = 0.5×5.25 = 2.625<br>
+                    <br>
+                    精确值约为2.6667，中点法的近似效果比左右端点法更好
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h2>例题4：黎曼和的极限定义</h2>
+            <div class="example-question">
+                <p>利用黎曼和的极限定义计算定积分∫₀¹x dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    第一步：分割区间[0,1]为n个等长小区间，每个区间长度Δx = 1/n<br>
+                    分点：xₖ = k/n，k = 0,1,2,...,n<br>
+                    <br>
+                    第二步：取右端点xₖ = k/n作为每个小区间的代表点<br>
+                    <br>
+                    第三步：构造黎曼和：<br>
+                    Σₖ=₁ⁿf(xₖ)Δx = Σₖ=₁ⁿ(k/n)×(1/n) = (1/n²)Σₖ=₁ⁿk<br>
+                    <br>
+                    第四步：利用等差数列求和公式Σₖ=₁ⁿk = n(n+1)/2<br>
+                    则黎曼和 = (1/n²)×n(n+1)/2 = (n+1)/(2n)<br>
+                    <br>
+                    第五步：取极限n→∞：<br>
+                    ∫₀¹x dx = limₙ→∞(n+1)/(2n) = limₙ→∞(1 + 1/n)/2 = 1/2<br>
+                    <br>
+                    因此，∫₀¹x dx = 1/2
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h2>例题5：黎曼和的极限定义 - 二次函数</h2>
+            <div class="example-question">
+                <p>利用黎曼和的极限定义计算定积分∫₀²x² dx</p>
+            </div>
+            <div class="example-solution">
+                <h3>解答：</h3>
+                <div class="node-math">
+                    第一步：分割区间[0,2]为n个等长小区间，Δx = 2/n<br>
+                    分点：xₖ = 2k/n，k = 0,1,2,...,n<br>
+                    <br>
+                    第二步：取右端点xₖ = 2k/n作为代表点<br>
+                    <br>
+                    第三步：构造黎曼和：<br>
+                    Σₖ=₁ⁿf(xₖ)Δx = Σₖ=₁ⁿ(2k/n)²×(2/n) = Σₖ=₁ⁿ(8k²/n³) = (8/n³)Σₖ=₁ⁿk²<br>
+                    <br>
+                    第四步：利用平方和公式Σₖ=₁ⁿk² = n(n+1)(2n+1)/6<br>
+                    则黎曼和 = (8/n³)×n(n+1)(2n+1)/6 = (8/6)×(n+1)(2n+1)/n² = (4/3)×(2n²+3n+1)/n²<br>
+                    <br>
+                    第五步：取极限n→∞：<br>
+                    ∫₀²x² dx = limₙ→∞(4/3)×(2n²+3n+1)/n² = (4/3)×2 = 8/3<br>
+                    <br>
+                    因此，∫₀²x² dx = 8/3，与精确值一致
+                </div>
+            </div>
+        </div>
+
         <div id="fundamental-theorem" class="example">
-            <h2>例题1：微积分基本定理第一部分 - 变上限积分的导数</h2>
+            <h2>例题6：微积分基本定理第一部分 - 变上限积分的导数</h2>
             <div class="example-question">
                 <p>设f(t) = 2t + 1，定义变上限积分Φ(x) = ∫₁ˣ(2t + 1)dt，验证Φ'(x) = f(x)</p>
             </div>
